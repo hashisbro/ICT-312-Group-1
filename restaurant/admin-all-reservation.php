@@ -6,22 +6,19 @@
         if($_SESSION['admin_id'] > 0){
             $_SESSION['loginErrorMessage'] ="";
         }else{
-            $_SESSION['loginErrorMessage'] ="<div class='alert alert-danger'>You have not login, Please login to proceed...</div>";
+            $_SESSION['loginErrorMessage'] ="<div class='alert alert-danger'>You have not logged in. Please log in to proceed...</div>";
             header('Location: admin.php');
         }
     ?>
        
         <div class="content">
             <div class="content">
-                <h1>Welcome to Local Restaurant</h1>
+                <h1>Welcome to Alpha Footwear Hub</h1>
 
                 <h2>All Reservation Details</h2>
 
                 <p>
-                    <form method="post">
-                      Search by Date: <input type="date" name="inputDate" id="inputDate" />
-                      <input type="submit" name="submit" />
-                    </form>
+                    <!-- Your search form code goes here -->
                 </p>
 
                 <table border="1">
@@ -36,7 +33,7 @@
                 </tr>
 
               <?php
-                $conn = mysqli_connect("localhost", "root", "", "restaurant_db");
+                $conn = mysqli_connect("localhost", "root", "", "alphafootwear_db");
                 $sql = mysqli_query($conn, "SELECT * FROM `reservation`");
 
                 if(isset($_POST['inputDate'])){
@@ -60,8 +57,6 @@
             </table>
  
             </div>
-
-
         </div>
 
 <?php include('footer.php');?>

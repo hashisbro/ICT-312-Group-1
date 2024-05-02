@@ -7,42 +7,42 @@
         if($_SESSION['admin_id'] > 0){
             $_SESSION['loginErrorMessage'] ="";
         }else{
-            $_SESSION['loginErrorMessage'] ="<div class='alert alert-danger'>You have not login, Please login to proceed...</div>";
+            $_SESSION['loginErrorMessage'] ="<div class='alert alert-danger'>You have not logged in. Please log in to proceed...</div>";
             header('Location: admin.php');
         }
     ?>
        
         <div class="content">
             <div class="content">
-                <h1>Welcome to Local Restaurant</h1>
+                <h1>Welcome to Alpha Footwear</h1>
 
-                <h2>ADD OR DELETE FOOD / MENU</h2>
+                <h2>ADD OR DELETE FOOTWEAR ITEMS</h2>
 
                 <script>
                     function confirm(){
-                        var food_name = document.getElementById('food_name').value;
-                        var food_price = document.getElementById('food_price').value;
-                        var food_details = document.getElementById('food_details').value;
-                        var food_image = document.getElementById('food_image').value;
+                        var footwear_name = document.getElementById('footwear_name').value;
+                        var footwear_price = document.getElementById('footwear_price').value;
+                        var footwear_details = document.getElementById('footwear_details').value;
+                        var footwear_image = document.getElementById('footwear_image').value;
                         
-                        if(food_name !== null && food_name !== '' && food_price !== null && food_price !== '' && food_details !== null && food_details !== '' && food_image !== null && food_image !== ''){
-                            alert("Food Added to Menu Successfully.");
+                        if(footwear_name !== null && footwear_name !== '' && footwear_price !== null && footwear_price !== '' && footwear_details !== null && footwear_details !== '' && footwear_image !== null && footwear_image !== ''){
+                            alert("Footwear Added to Inventory Successfully.");
                         }
                         
                         
                     }
                 </script>
 
-                <form method="post" action="processing/admin-food-menu.php">
-                    <p>** Image should be in htdoc -> restaurant -> images -> food folder</p>
+                <form method="post" action="processing/admin-footwear-menu.php">
+                    <p>** Image should be in htdoc -> alphafootwear -> images -> footwear folder</p>
                     <table>
                         <tr>
                             <td>Category ID: *</td>
                             <td><select name="category_id" id="category_id">
                                 
                                     <?php
-                                        $conn = mysqli_connect("localhost", "root", "", "restaurant_db");
-                                        $sql = mysqli_query($conn, "SELECT * FROM `food_category`");
+                                        $conn = mysqli_connect("localhost", "root", "", "alphafootwear_db");
+                                        $sql = mysqli_query($conn, "SELECT * FROM `footwear_category`");
 
                                         while($data = mysqli_fetch_array($sql)){
                                             $id = $data['category_id'];
@@ -56,54 +56,54 @@
                             </select></td>
                         </tr>
                         <tr>
-                            <td>Food Name: *</td>
-                            <td><input type="text" name="food_name" id="food_name" required="required"></td>
+                            <td>Footwear Name: *</td>
+                            <td><input type="text" name="footwear_name" id="footwear_name" required="required"></td>
                         </tr>
                         <tr>
-                            <td>Food Price: *</td>
-                            <td><input type="number" step="0.01" name="food_price" id="food_price" required="required"></td>
+                            <td>Footwear Price: *</td>
+                            <td><input type="number" step="0.01" name="footwear_price" id="footwear_price" required="required"></td>
                         </tr>
                         <tr>
-                            <td>Food Details: *</td>
-                            <td><input type="text" name="food_details" id="food_details" required="required"></td>
+                            <td>Footwear Details: *</td>
+                            <td><input type="text" name="footwear_details" id="footwear_details" required="required"></td>
                         </tr>
                         <tr>
-                            <td>Food Image Name: *</td>
-                            <td><input type="file" name="food_image" id="food_image" required="required" accept="image/*"></td>
+                            <td>Footwear Image Name: *</td>
+                            <td><input type="file" name="footwear_image" id="footwear_image" required="required" accept="image/*"></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td><input type="submit" name="submit" value="ADD FOOD to MENU" id="submit" onclick="return confirm()"></td>
+                            <td><input type="submit" name="submit" value="ADD FOOTWEAR to INVENTORY" id="submit" onclick="return confirm()"></td>
                         </tr>
                     </table>
                 </form>
 
-                <h2>List of Food on Menu</h2>
+                <h2>List of Footwear in Inventory</h2>
                 <table border="1">
                 <tr>
-                  <th>Food Menu ID</th>
+                  <th>Footwear ID</th>
                   <th>Category ID</th>
-                  <th>Food Name</th>
-                  <th>Food Price</th>
-                  <th>Food Details</th>
-                  <th>Food Image Name</th>
+                  <th>Footwear Name</th>
+                  <th>Footwear Price</th>
+                  <th>Footwear Details</th>
+                  <th>Footwear Image Name</th>
                   <th>Action</th>
                 </tr>
 
               <?php
-                $conn = mysqli_connect("localhost", "root", "", "restaurant_db");
-                $sql = mysqli_query($conn, "SELECT * FROM `food_menu`");
+                $conn = mysqli_connect("localhost", "root", "", "alphafootwear_db");
+                $sql = mysqli_query($conn, "SELECT * FROM `footwear_inventory`");
 
                 while($data = mysqli_fetch_array($sql)){
-                    $food_menu_id = $data['food_menu_id']; 
+                    $footwear_id = $data['footwear_id']; 
                   echo "<tr>";
-                    echo "<td>".$food_menu_id."</td>";
+                    echo "<td>".$footwear_id."</td>";
                     echo "<td>".$data['category_id']."</td>";
-                    echo "<td>".$data['food_name']."</td>";
-                    echo "<td>".$data['food_price']."</td>";
-                    echo "<td>".$data['food_details']."</td>";
-                    echo "<td>".$data['food_image']."</td>";
-                    echo "<td><a href='processing/admin-delete-food-menu.php?food_menu_id=$food_menu_id'>Delete</a></td>";
+                    echo "<td>".$data['footwear_name']."</td>";
+                    echo "<td>".$data['footwear_price']."</td>";
+                    echo "<td>".$data['footwear_details']."</td>";
+                    echo "<td>".$data['footwear_image']."</td>";
+                    echo "<td><a href='processing/admin-delete-footwear.php?footwear_id=$footwear_id'>Delete</a></td>";
                   echo "</tr>";
                 }
                       
